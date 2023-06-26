@@ -4,8 +4,6 @@ from eth_keys import keys
 from eth_utils import decode_hex
 from bip_utils import Bip44, Bip44Coins
 from bip_utils import EthAddr
-from eth_utils import remove_0x_prefix
-
 
 # Функция для чтения приватных ключей из файла
 def read_private_keys(filename):
