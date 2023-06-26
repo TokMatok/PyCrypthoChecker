@@ -1,9 +1,11 @@
 import threading
 import requests
-
-from bip_utils import Bip44, Bip44Coins, Bip44Eth
+from eth_keys import keys
+from eth_utils import decode_hex
+from bip_utils import Bip44, Bip44Coins
 from bip_utils import EthAddr
 from eth_utils import remove_0x_prefix
+
 
 # Функция для чтения приватных ключей из файла
 def read_private_keys(filename):
@@ -12,14 +14,10 @@ def read_private_keys(filename):
     return private_keys
 
 # Функция для получения адреса из приватного ключа
-def get_address(private_key):
-    
-    private_key = remove_0x_prefix(private_key) # Удаление префикса "0x" из приватного ключа, если присутствует
-    bip44_eth = Bip44.FromPrivateKeyBytes(bytes.fromhex(private_key), Bip44Coins.ETH) # Создание экземпляра Bip44Eth с использованием приватного ключа
-    # Получение адреса
-    address_bytes = bip44_eth.PublicKey().ToBytes()
-    address = EthAddr.EncodeKey(address_bytes)
-    return address
+def get_address(private_key_hex):
+     private_key = keys.PrivateKey(decode_hex(private_key_hex))
+     adress = private_key.public_key.to_checksum_address()
+     return adress
 
 
 # Функция для проверки баланса адреса
