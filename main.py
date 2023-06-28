@@ -32,9 +32,9 @@ def process_private_key(private_key):
     balance = check_balance(address)
     print(f"Адрес: {address}, Баланс: {balance} ETH")
 
-# Основная функция
+
 def main():
-    filename = "private_keys.txt"  # Имя файла с приватными ключами
+    filename = "private_keys.txt" 
     private_keys = read_private_keys(filename)
 
     threads = []
