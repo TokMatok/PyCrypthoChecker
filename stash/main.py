@@ -32,9 +32,9 @@ async def process_private_key(session, private_key):
     balance = await check_balance(session, address)
     print(f"Адрес: {address}, Баланс: {balance} ETH")
 
-# Основная функция
+
 async def main():
-    filename = "private_keys.txt"  # Имя файла с приватными ключами
+    filename = "private_keys.txt" 
     private_keys = read_private_keys(filename)
 
     async with aiohttp.ClientSession() as session:
@@ -42,7 +42,7 @@ async def main():
         for private_key in private_keys:
             task = process_private_key(session, private_key)
             tasks.append(task)
-            await asyncio.sleep(0.2)  # Задержка в 0.2 секунды между запросами
+            await asyncio.sleep(0.2) 
         await asyncio.gather(*tasks)
 
     print("Проверка баланса завершена")
